@@ -1,8 +1,6 @@
 import argparse
-from products import MSequenceFromFile, MSequenceFromScipy
+from m_sequences import MSequenceFromFile, MSequenceFromScipy
 
-# ORDER_8_PATH = "DATA/Random/Compensation/m_sequence_8.txt"
-# ORDER_6_PATH = "DATA/Random/Compensation/m_sequence_6.txt"
 
 def main():
     """ Entry point for the program """

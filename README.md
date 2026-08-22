@@ -2,7 +2,7 @@
 
 The purpose of this repository is threefold:
 1. The Zech logarithms of $\text{GF}(2^n)$ are calculated via products of maximum length (m-)sequences.
-2. Gold sequences are created from m-sequence decimations, and
+2. Gold sequences are created from m-sequence decimations, and we provide
 3. Expository notes on how m-sequences arise from finite field (Galois) theory.
 
 ## Background
@@ -33,7 +33,9 @@ Given a text file of an m-sequence, one integer per line the Zech logarithms are
 ```python main.py mseq.txt```\
 If the sequence is as $`\{0,1\}`$ it will automatically be converted to $`\{-1,1\}`$. Alternatively one can use `scipy.signal.max_len_seq()` to generate the sequence from its polynomial taps (see the `scipy` documentation). Use the `-n` (order) `-t` (taps) and `-s` (seed) flags, for example\
 ```python main.py -3 ? -t 1 -s 1,1,1 ??CHECK TODO ```\
-gives the logarithms [5,3,2,6,1,4] corresponding to the polynomial $X^3 + X^2 + 1$. N.B a text file will override any flags.
+gives the logarithms [5,3,2,6,1,4] corresponding to the polynomial $X^3 + X^2 + 1$. Note for binary fields the Zech logarithms satisfy $Z_\alpha(\tau) = k \leftrightarrow Z_\alpha(k) = \tau$.
+
+Note if a text file is provided any flags will be ignored.
 
 ## Requirements
 Any recent version of `numpy` and `scipy` should work, e.g. TODO.
