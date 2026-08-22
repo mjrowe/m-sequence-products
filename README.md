@@ -29,11 +29,15 @@ The program `main.py` calculates products of a user supplied m-sequence with all
 A second program `decimations.py` generates different m-sequences formed from decimating (sub-sampling) the original sequence. For special (co-prime) decimations taking products with the original sequence generates what is known as Gold sequences. These are the program's output.
 
 ## Usage
-Given a text file of an m-sequence, one integer per line the Zech logarithms are produced via\
-```python3 main.py mseq.txt```\
-If the sequence is as $`\{0,1\}`$ it will automatically be converted to $`\{-1,1\}`$. Alternatively one can use `scipy.signal.max_len_seq()` to generate the sequence from its polynomial taps (see the `scipy` documentation). Use the `-n` (order) `-t` (taps) and `-s` (seed) flags, for example\
-```python3 main.py -n 3 -t 1 -s 1,1,1```\
-gives the logarithms [5,3,2,6,1,4] corresponding to the polynomial $X^3 + X^2 + 1$. Note for binary fields the Zech logarithms satisfy $Z_\alpha(\tau) = k \leftrightarrow Z_\alpha(k) = \tau$.
+Given a text file of an m-sequence, one integer per line, the Zech logarithms are produced via
+```{sh}
+$ python3 main.py mseq.txt
+```
+If the sequence is written as $`\{0,1\}`$ it will automatically be converted to $`\{-1,1\}`$ (note the order). Alternatively one can use `scipy.signal.max_len_seq()` to generate the sequence from its polynomial taps (see the `scipy` documentation). Use the `-n` (order) `-t` (taps) and `-s` (seed) flags, for example
+```{sh}
+$ python3 main.py -n 3 -t 1 -s 1,1,1
+```
+gives the logarithms [5,3,2,6,1,4] of $\text{GF}(8)$ corresponding to the primitive polynomial $X^3 + X^2 + 1$. Note for binary fields the Zech logarithms satisfy $Z_\alpha(\tau) = k \Leftrightarrow Z_\alpha(k) = \tau$.
 
 Note if a text file is provided any flags will be ignored.
 
