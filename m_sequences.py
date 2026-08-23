@@ -1,6 +1,3 @@
-""" The main script to calculate the offset of a product of M-sequences. This is
-equivalently calculating the Zech logarithms of the Galois field GF(2**n). """
-
 import numpy as np
 from scipy.ndimage import correlate1d
 from scipy.signal import max_len_seq
@@ -12,13 +9,14 @@ class MSequence:
         self.base_peak = self._find_peak(correlate1d(MSeq, MSeq, mode='wrap'))
 
     def find_shift(self, shifted_array: np.ndarray):
+        """ Finds the offset between a shifted sequence and the base sequence for the class. """
         derived_impulse = correlate1d(self.MSeq, shifted_array, mode='wrap')
         derived_peak = self._find_peak(derived_impulse)
 
         return (self.base_peak - derived_peak)%self.length
 
-    def find_product_offsets(self):
-        self.product_offsets = np.array([self.find_shift(self.MSeq*self._shift(self.MSeq, i)) 
+    def find_Zech_logs(self):
+        self.Zech_logs = np.array([self.find_shift(self.MSeq*self._shift(self.MSeq, i)) 
                                         for i in range(1, self.length)])
 
     @staticmethod

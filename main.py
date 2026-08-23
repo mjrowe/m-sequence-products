@@ -1,6 +1,8 @@
+""" The main script to calculate the offset of a product of M-sequences. This is
+equivalently calculating the Zech logarithms of the Galois field GF(2**n). """
+
 import argparse
 from m_sequences import MSequenceFromFile, MSequenceFromScipy
-
 
 def main():
     """ Entry point for the program """
@@ -13,8 +15,8 @@ def main():
     else:
         m_seq = MSequenceFromScipy(args.nbits, args.state, args.taps)
 
-    m_seq.find_product_offsets()
-    print(m_seq.product_offsets)
+    m_seq.find_Zech_logs()
+    print(m_seq.Zech_logs)
 
 def parse_command_line_input():
     """ Parse the input. Either a text file containing the M-sequence must be provided,
@@ -35,5 +37,3 @@ def parse_command_line_input():
 
 if __name__ == "__main__":
     main()
-
-    # Can the n argument be positional as well?
