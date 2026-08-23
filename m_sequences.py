@@ -51,6 +51,4 @@ class MSequenceFromScipy(MSequence):
 
         m = 2*max_len_seq(order, state=state, taps=taps)[0]-1
 
-        return m.astype(np.int32, copy=False)
-
-# Is typing correct
+        return m.astype(np.int32, copy=False)    
