@@ -19,6 +19,9 @@ class MSequence:
         self.Zech_logs = np.array([self.find_shift(self.MSeq*self._shift(self.MSeq, i)) 
                                         for i in range(1, self.length)])
 
+    def decimate(self, d: int):
+        return self.MSeq.take(range(0,d*self.length,d), mode='wrap')
+
     @staticmethod
     def _shift(arr: np.ndarray, shift: int):
         return np.roll(arr, shift)
