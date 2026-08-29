@@ -26,6 +26,7 @@ class Decimations:
         representatives = set([min(cycle) for cycle in primitive_element_cycles])
 
         self.non_trivial_decimations = sorted(list(representatives))
+        self.num_primitive_polynomials = len(self.non_trivial_decimations)
 
     def find_gold_decimations(self):
         candidate_integers = np.arange(1, self.n, dtype=int)
@@ -33,14 +34,18 @@ class Decimations:
 
         self.gold_decimations = [2**k + 1 for k in gold_exponents]
 
-def construct_all_m_sequences():
-    pass
+    def summarise(self):
+        print("*"*80, "SUMMARY", sep="\n")
+        print(f"There are {self.num_primitive_polynomials} unique m-sequences at n = {self.n}, produced by decimating the original at:")
+        print("d = ", self.non_trivial_decimations)
+        print(f"Of these {self.gold_decimations} are Gold decimations.\n" + "*"*80)
 
-def construct_decimation_products():
-    pass
 
-def decimation_properties():
-    pass
+def sanity_check(MSeq: np.ndarray):
+    auto_correlation = correlate1d(MSeq, MSeq, mode='wrap')
+    unique_levels = np.unique(auto_correlation).size
+
+    return unique_levels == 2
 
 if __name__ == "__main__":
 
@@ -50,16 +55,20 @@ if __name__ == "__main__":
     decimations = Decimations(m_seq.length)
 
     for d in decimations.non_trivial_decimations:
-        print(f"DECIMATION d = {d}")
-        if d in decimations.gold_decimations:
-            print("GOLD TYPE")
+        print(f"DECIMATION: d = {d}")
+        print(f"GOLD TYPE: {d in decimations.gold_decimations}")
+
         new_m_sequence = m_seq.decimate(d)
+        if not sanity_check(new_m_sequence):
+            raise Exception("This decimation should produce an m-sequence but doesn't!")
 
-        # product_sequence = ?
-
-        auto_correlation = correlate1d(new_m_sequence, new_m_sequence, mode='wrap')
         cross_correlation = correlate1d(m_seq.MSeq, new_m_sequence, mode='wrap')
+        unique_levels = np.unique(cross_correlation)
+        print(f"{unique_levels.size} LEVEL cross-correlation with d = 1: ", unique_levels, "\n")
 
-        print("Autocorrelation: ", np.unique(auto_correlation))
-        print("Cross-correlation with original: ", np.unique(cross_correlation))
-        print(f"{np.unique(cross_correlation).size} LEVEL\n")
+    decimations.summarise()
+
+
+    # TODO Sort out docstrings and typing
+    # Gold sequences are not working!
+    # Bitbucket change gold codes to gold decimations
