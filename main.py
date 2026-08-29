@@ -5,19 +5,20 @@ import argparse
 from m_sequences import MSequenceFromFile, MSequenceFromScipy
 
 def main():
-    """ Entry point for the program """
     args = parse_command_line_input()
-
-    if args.file_path is not None:
-        m_seq = MSequenceFromFile(args.file_path)
-    elif args.nbits is None:
-        raise Exception('Either a file or an integer must be provided as arguments.')
-    else:
-        m_seq = MSequenceFromScipy(args.nbits, args.state, args.taps)
+    m_seq = validate_input(args)
 
     m_seq.find_Zech_logs()
     print(m_seq.Zech_logs)
 
+def validate_input(args):
+    if args.file_path is not None:
+        return MSequenceFromFile(args.file_path)
+    elif args.nbits is None:
+        raise Exception('Either a file or an integer must be provided as arguments.')
+    else:
+        return MSequenceFromScipy(args.nbits, args.state, args.taps)
+    
 def parse_command_line_input():
     """ Parse the input. Either a text file containing the M-sequence must be provided,
      or inputs to interface with scipy.signal.max_len_seq(). """
