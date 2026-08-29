@@ -2,7 +2,7 @@
 
 The purpose of this repository is threefold:
 1. The Zech logarithms of $\text{GF}(2^n)$ are calculated via products of maximum length (m-) sequences.
-2. Gold sequences are created from m-sequence decimations.
+2. Interesting decimations are explored.
 3. We give expository notes on how m-sequences arise from finite field (Galois) theory.
 
 ## Background
@@ -26,7 +26,7 @@ which naturally contains sucessive products of the input $x[n]$. If the 'kernels
 ## Code
 The program `main.py` calculates products of a user supplied m-sequence with all possible shifted versions of itself (i.e. all $\tau$). As the circular autocorrelation of an m-sequence is an impulse (see the notes for a beautiful proof!) one can find the resulting offset $Z_\alpha(\tau)$ by the delay of this peak. The program thus calculates the Zech logarithms of $\text{GF}(2^n)$ for the primitive element that corresponds to the m-sequence. This is not a particularly efficient method for doing this calculation but rather a pedagogical approach.
 
-A second program `decimations.py` generates different m-sequences formed from decimating (sub-sampling) the original sequence. Via special (coprime) decimations we construct all $(1/n) \cdot \varphi(2^n - 1)$ m-sequences at a given order, picking only one representative from the coset $`i*\{1,2,4,..., 2^{n-1}\}`$ to remove the multiplicity (OEIS A011260). Certain 'Gold' decimations are noted which have nice ($3$-level) cross-correlations.
+A second program `decimations.py` generates different m-sequences formed from decimating (sub-sampling) the original sequence. Via special (coprime) decimations we construct all $(1/n) \cdot \varphi(2^n - 1)$ m-sequences at a given order, picking only one representative from the coset $`i*\{1,2,4,..., 2^{n-1}\}`$ to remove the multiplicity (OEIS A011260). Certain 'Gold' decimations are noted which have nice ($3$-level) cross-correlations [2].
 
 ## Usage
 Given a text file of an m-sequence, one integer per line, the Zech logarithms are produced via
@@ -47,5 +47,7 @@ Any recent version of `numpy` and `scipy` should work, I used versions 1.26.4 an
 ## References
 
 [1] Matthew Wright, *Comments on 'Aspects of MLS Measuring Systems'*, Journal of the Audio Engineering Society, 43, 1 (1995).
+
+[2] Tor Helleseth and Chunlei Li, *An updated review on crosscorrelation of m-sequences*, arXiv 2407.16072v1.
 
 No artificial intelligence tools were used in the creation of this repository, all mistakes are entirely mine!
