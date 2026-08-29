@@ -26,7 +26,7 @@ which naturally contains sucessive products of the input $x[n]$. If the 'kernels
 ## Code
 The program `main.py` calculates products of a user supplied m-sequence with all possible shifted versions of itself (i.e. all $\tau$). As the circular autocorrelation of an m-sequence is an impulse (see the notes for a beautiful proof!) one can find the resulting offset $Z_\alpha(\tau)$ by the delay of this peak. The program thus calculates the Zech logarithms of $\text{GF}(2^n)$ for the primitive element that corresponds to the m-sequence. This is not a particularly efficient method for doing this calculation but rather a pedagogical approach.
 
-A second program `decimations.py` generates different m-sequences formed from decimating (sub-sampling) the original sequence. For special (co-prime) decimations taking products with the original sequence generates what is known as Gold sequences. These are the program's output.
+A second program `decimations.py` generates different m-sequences formed from decimating (sub-sampling) the original sequence. Via special (coprime) decimations we construct all $(1/n) \cdot \varphi(2^n - 1)$ m-sequences at a given order, picking only one representative from the coset $`i*\{1,2,4,..., 2^{n-1}\}`$ to remove the multiplicity (OEIS A011260). Certain 'Gold' decimations are noted which have nice ($3$-level) cross-correlations.
 
 ## Usage
 Given a text file of an m-sequence, one integer per line, the Zech logarithms are produced via
@@ -37,9 +37,9 @@ If the sequence is written as $`\{0,1\}`$ it will automatically be converted to 
 ```{sh}
 $ python3 main.py -n 3 -t 1 -s 1,1,1
 ```
-gives the logarithms [5,3,2,6,1,4] of $\text{GF}(8)$ corresponding to the primitive polynomial $X^3 + X^2 + 1$. Note for binary fields the Zech logarithms satisfy $Z_\alpha(\tau) = k \Leftrightarrow Z_\alpha(k) = \tau$.
+gives the logarithms [5,3,2,6,1,4] of $\text{GF}(8)$ corresponding to the primitive polynomial $X^3 + X^2 + 1$. Note for binary fields the Zech logarithms satisfy $Z_\alpha(\tau) = k \Leftrightarrow Z_\alpha(k) = \tau$. If a text file is provided any flags will be ignored.
 
-Note if a text file is provided any flags will be ignored.
+The usage of `decimations.py` is identical.
 
 ## Requirements
 Any recent version of `numpy` and `scipy` should work, I used versions 1.26.4 and 1.11.2 respectively.
